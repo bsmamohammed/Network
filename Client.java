@@ -11,9 +11,10 @@ public class Client {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Socket Socket = null;
         try {
             // Project Requirement: Establish a persistent TCP connection to the server.
-            Socket Socket = new Socket(ServerHost, ServerPort);
+             Socket = new Socket(ServerHost, ServerPort);
             System.out.println("Connected to the server at " + ServerHost + " on port " + ServerPort);
 
             // Set up input and output streams for network communication.
@@ -39,6 +40,7 @@ public class Client {
         while (true) { // Loop for multiple requests over the same connection.
             String input = getUserInput(scanner);
             if (shouldExit(input)) {
+                socket.close();
                 break; // Exit the loop and close the connection.
             }
 
